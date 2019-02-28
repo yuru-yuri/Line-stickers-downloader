@@ -11,6 +11,9 @@ arguments = ArgumentParser()
 arguments.add_argument('idx', type=int, help='Get manga info from ids', nargs="*")
 arguments.add_argument('--url', type=str, help='Get manga info from ids', default='')
 arguments.add_argument('-d', '--destination', type=str, help='Destination folder', default='')
+arguments.add_argument(
+    '-a', '--animate', help='Download animate version', action='store_const', const=True, default=False
+)
 
 argcomplete.autocomplete(arguments)
 
@@ -76,9 +79,16 @@ class Downloader:
         dst.mkdir(parents=True)
         progress = ProgressBar(max_value=len(images))
         for idx, image in enumerate(images):
+            url = self.sticker_url(image)
             with open(str(dst.joinpath('{}.png'.format(idx + 1))), 'wb') as file:
-                file.write(get(image).content)
+                file.write(get(url).content)
             progress.update(idx + 1)
+
+    def sticker_url(self, url):
+        animate_suffix = '/IOS/sticker_popup.png;compress=true'
+        if not self.args.animate:
+            return url
+        return re.sub(r'(.+?/\d+)/\w+/sticker.+', r'\1', url) + animate_suffix
 
 
 if __name__ == '__main__':
