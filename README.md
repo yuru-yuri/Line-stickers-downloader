@@ -25,8 +25,6 @@ python Line-stickers-downloader/dl.py --url https://store.line.me/stickershop/pr
 #### Help:
 
 ```bash
-python Line-stickers-downloader/dl.py -h
-
 usage: Line-stickers-downloader/dl.py [-h] [--url URL] [-d DESTINATION] [idx [idx ...]]
 
 positional arguments:
