@@ -1,6 +1,6 @@
 requests
-lxml>=3.7.2
-cssselect>=1.0.0
-argcomplete>=1.9.4
-tinycss>=0.4
-progressbar2>3.34
+lxml
+cssselect
+argcomplete
+progressbar2
+
